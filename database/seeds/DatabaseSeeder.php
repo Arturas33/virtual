@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call(VrLanguageCodesSeeder::class);
+        $this->call(VrRolesSeeder::class);
+        $this->call(VrCategoriesSeeder::class);
+        $this->call(VrMenuSeeder::class);
+        $this->call(VrMenuTranslationsSeeder::class);
+        $this->call(VrPagesSeeder::class);
+        $this->call(VrPagesTranslationsSeeder::class);
+
     }
+
 }
