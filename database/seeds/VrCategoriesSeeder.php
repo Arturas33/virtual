@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\VrCategories;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;

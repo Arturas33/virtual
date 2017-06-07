@@ -19,10 +19,7 @@ class VrUsersController extends Controller
        //
     }
 
-    public function orderIndex (string $id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for creating a new resource.
