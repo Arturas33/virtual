@@ -14,7 +14,9 @@
 Route::get('/', function () {
        return view('welcome');
    });
+Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
 //Auth::routes();
 //
 //
@@ -24,10 +26,9 @@ Route::get('/', function () {
 //    Route::get('/frontend', ['as' => 'app.frontEnd.index', 'uses' => 'FrontEndController@index']);
 //});
 
-Route::group(['prefix' => 'auth'], function () {
-
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']], function () {
     Route::get('/', function () {
-        return view('base');
+        return view('welcome');
     });
 
     Route::group(['prefix' => 'menu'], function () {
@@ -106,6 +107,4 @@ Route::group(['prefix' => 'auth'], function () {
 //
 //Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
