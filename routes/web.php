@@ -28,7 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']], function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('admin.list');
     });
 
     Route::group(['prefix' => 'menu'], function () {
@@ -96,6 +96,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']
 
             Route::get('/orders', ['as' => 'app.users.orders', 'uses' => 'VrUsersController@orderIndex']);
         });
+    });
+    Route::group(['prefix' => 'lenguage'], function () {
+        Route::get('/', ['as' => 'app.lenguage.index', 'uses' => 'VrLanguageCodesController@index']);
+
     });
 });
 
