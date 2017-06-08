@@ -16,14 +16,14 @@
 
                                 @if($key == 'is_active')
                                     <td>     @if($value == 1 )
-                                            <button type="button"style="display:none"
+                                            <button onclick="enableaDisableLanguage({{route('app.language.edit'), $record['id'], 0}})" type="button" style="display:none"
                                                     class="btn btn-success">{{trans('app.active')}}</button>
-                                            <button type="button"
+                                            <button onclick="enableaDisableLanguage({{route('app.language.edit'), $record['id'], 1}})" type="button"
                                                     class="btn btn-danger">{{trans('app.disable')}}</button>
                                         @else
-                                            <button type="button"
+                                            <button onclick="enableaDisableLanguage({{route('app.language.edit'), $record['id'],0}})" type="button"
                                                     class="btn btn-success">{{trans('app.active')}}</button>
-                                            <button type="button"style="display:none"
+                                            <button onclick="enableaDisableLanguage({{route('app.language.edit'), $record['id'],1}})" type="button" style="display:none"
                                                     class="btn btn-danger">{{trans('app.disable')}}</button>
                                         @endif
                                     </td>
@@ -45,4 +45,14 @@
             @endif
         </div>
     </div>
+@endsection
+
+@section('scripts')
+<script>
+    function enableaDisableLanguage(url,value)
+    {
+        alert('Hello')
+    }
+
+</script>
 @endsection

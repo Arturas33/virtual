@@ -98,7 +98,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']
         });
     });
     Route::group(['prefix' => 'language'], function () {
-        Route::get('/', ['as' => 'app.lenguage.index', 'uses' => 'VrLanguageCodesController@index']);
+        Route::get('/', ['as' => 'app.language.index', 'uses' => 'VrLanguageCodesController@index']);
+        Route::get('/edit', ['as' => 'app.language.edit', 'uses' => 'VrLanguageCodesController@edit']);
+        Route::post('/edit', ['uses' => 'VrLanguageCodesController@update']);
 
     });
 });
