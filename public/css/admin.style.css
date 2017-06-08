@@ -1,0 +1,21 @@
+html, body {
+    width: 100%;
+    height: 100%;
+
+}
+#menu {
+    background-color: #222d32;
+    width: 230px;
+    position: fixed;
+}
+#list {
+    background-color: #c0a16b;
+    width: 100%;
+    height: 100%;
+   /*margin-left: 230px;*/
+    padding-left: 230px;
+
+}
+#menu a {
+    color:#b8c7ce;
+}
