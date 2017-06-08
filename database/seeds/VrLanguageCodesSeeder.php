@@ -14,8 +14,12 @@ class VrLanguageCodesSeeder extends Seeder
     public function run()
     {
         $languages = [
-            ['id'=>'en', "language_code" => "en"],
-            ['id'=>'lt', "language_code" => "lt"],
+            ['id'=>'en', "language_code" => "en", "name"=>'English'],
+            ['id'=>'lt', "language_code" => "lt", "name"=>'Lietuvių'],
+            ['id'=>'ru', "language_code" => "ru", "name"=>'Pусский'],
+            ['id'=>'de', "language_code" => "de", "name"=>'Deutsch'],
+            ['id'=>'fr', "language_code" => "fr", "name"=>'Français'],
+
         ];
 
         DB::beginTransaction();

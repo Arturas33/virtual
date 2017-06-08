@@ -15,7 +15,7 @@ class AddColumNameAndIsActiveToLanguageCodes extends Migration
     {
         Schema::table('vr_language_codes', function (Blueprint $table) {
             $table->string('name', 255);
-            $table->tinyInteger('is_active');
+            $table->tinyInteger('is_active')->default(0);
 
         });
     }
