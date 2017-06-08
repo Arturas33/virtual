@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\VrLanguageCodes;
 use Illuminate\Routing\Controller;
 
 class VrLanguageCodesController extends Controller {
@@ -12,7 +13,12 @@ class VrLanguageCodesController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$config = [];
+		$config['list'] = VrLanguageCodes::get()->toArray();
+
+        return view('admin.list', $config);
+
+
 	}
 
 	/**

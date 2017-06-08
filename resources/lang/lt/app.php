@@ -8,6 +8,7 @@ return [
     'categories' => 'Kategorjos',
     'menu' => 'Meniu',
     'orders' => 'Užsakimai',
-    'user' => 'Vartotojai'
+    'user' => 'Vartotojai',
+    'no_data'=>'Nera duomenu'
 
 ];

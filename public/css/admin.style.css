@@ -9,7 +9,7 @@ html, body {
     position: fixed;
 }
 #list {
-    background-color: #c0a16b;
+    background-color:#ffeecc;
     width: 100%;
     height: 100%;
    /*margin-left: 230px;*/
@@ -18,4 +18,11 @@ html, body {
 }
 #menu a {
     color:#b8c7ce;
+}
+
+th, td{
+    border: solid 1px;
+    padding: 5px;
+    color: black;
+
 }
