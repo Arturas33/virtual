@@ -9,6 +9,8 @@ return [
     'menu' => 'Meniu',
     'orders' => 'Užsakimai',
     'user' => 'Vartotojai',
-    'no_data'=>'Nera duomenu'
+    'no_data' => 'Nera duomenu',
+    'active' => 'ijungti',
+    'disable' => 'išjungti',
 
 ];
