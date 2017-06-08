@@ -22,7 +22,7 @@ class SuperAdminCheck
      */
     public function handle($request, Closure $next)
     {
-        dd(auth()->user()->role->pluck('id')->toArray());
+       // dd(auth()->user()->role->pluck('id')->toArray());
         if (in_array('super-admin', auth()->user()->role->pluck('id')->toArray())) {
             return $next($request);
         } else {
