@@ -29,6 +29,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']], function () {
     Route::get('/', function () {
         return view('admin.list');
+        return view('admin.core');
     });
 
     Route::group(['prefix' => 'menu'], function () {
@@ -97,11 +98,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']
             Route::get('/orders', ['as' => 'app.users.orders', 'uses' => 'VrUsersController@orderIndex']);
         });
     });
+
     Route::group(['prefix' => 'language'], function () {
         Route::get('/', ['as' => 'app.language.index', 'uses' => 'VrLanguageCodesController@index']);
-        Route::get('/edit', ['as' => 'app.language.edit', 'uses' => 'VrLanguageCodesController@edit']);
-        Route::post('/edit', ['uses' => 'VrLanguageCodesController@update']);
+        Route::get('/create', ['as' => 'app.language.create', 'uses' => 'VrLanguageCodesController@create']);
+        Route::post('/create', ['uses' => 'VrLanguageCodesController@store']);
+        Route::group(['prefix' => '{id}'], function () {
+            Route::get('/', ['as' => 'app.language.show', 'uses' => 'VrLanguageCodesController@show']);
+            Route::get('/edit', ['as' => 'app.language.edit', 'uses' => 'VrLanguageCodesController@edit']);
+            Route::post('/edit', ['uses' => 'VrLanguageCodesController@update']);
+            Route::delete('/delete', ['as' => 'app.language.destroy', 'uses' => 'VrLanguageCodesController@destroy']);
 
+            Route::get('/orders', ['as' => 'app.users.orders', 'uses' => 'VrLanguageCodesController@orderIndex']);
+        });
     });
 });
 
