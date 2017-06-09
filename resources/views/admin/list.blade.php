@@ -4,26 +4,32 @@
         <div class="container">
             @if(sizeof($list) > 0 )
                 <table class="table table-hover">
+                    <h3>{{ trans('app.language_codes_list') }}</h3>
                     <tr>
                         @foreach($list[0] as $key => $value)
                             <th> {{$key}}</th>
                         @endforeach
                     </tr>
                     <tr>
-                        @foreach($list as $record)
+                    @foreach($list as $record)
+                        <tr id="{{ $record['id'] }}">
 
                             @foreach($record as $key => $value)
 
                                 @if($key == 'is_active')
                                     <td>     @if($value == 1 )
-                                            <button onclick="enableaDisableLanguage({{route('app.language.edit'), $record['id'], 0}})" type="button" style="display:none"
+                                            <button onclick="toggleActive('{{ route($callAction, $record['id'] )}}',1)"
+                                                    type="button" style="display:none"
                                                     class="btn btn-success">{{trans('app.active')}}</button>
-                                            <button onclick="enableaDisableLanguage({{route('app.language.edit'), $record['id'], 1}})" type="button"
+                                            <button onclick="toggleActive('{{ route($callAction, $record['id'] )}}',0 )"
+                                                    type="button"
                                                     class="btn btn-danger">{{trans('app.disable')}}</button>
                                         @else
-                                            <button onclick="enableaDisableLanguage({{route('app.language.edit'), $record['id'],0}})" type="button"
+                                            <button onclick="toggleActive('{{ route($callAction, $record['id'] ) }}',1)"
+                                                    type="button"
                                                     class="btn btn-success">{{trans('app.active')}}</button>
-                                            <button onclick="enableaDisableLanguage({{route('app.language.edit'), $record['id'],1}})" type="button" style="display:none"
+                                            <button onclick="toggleActive('{{ route($callAction, $record['id'] )}}', 0)"
+                                                    type="button" style="display:none"
                                                     class="btn btn-danger">{{trans('app.disable')}}</button>
                                         @endif
                                     </td>
@@ -34,7 +40,7 @@
 
                             @endforeach
 
-                    </tr>
+                        </tr>
                     @endforeach
 
 
@@ -48,11 +54,53 @@
 @endsection
 
 @section('scripts')
-<script>
-    function enableaDisableLanguage(url,value)
-    {
-        alert('Hello')
-    }
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        function toggleActive(URL, value) {
+//            console.log(URL, value);
+            $.ajax({
+                url: URL,
+                type: 'POST',
+                data: {
+                    is_active: value
+                },
+                success: function (response) {
 
-</script>
+//                  console.log($('#' + response.id))
+//                    console.log($('#' + response.id).hide());
+//                        $('#' + response.id).css({
+//                            opacity:0.5,
+//                            backgroundColor:'red'
+//
+//                        })
+
+//                    console.log($('#' + response.id).find('button'))
+                    var $disable = ($('#' + response.id).find('.btn-danger'))
+                    var $enable = ($('#' + response.id).find('.btn-success'))
+
+//                    console.log(disable, enable)
+//
+//                    if(response.is_active == 0)
+//                    {
+//                     alert('respons is active' + response.is_active)
+//                    }
+
+                    if (response.is_active === '1') {
+
+                        $enable.hide();
+                        $disable.show();
+                    } else {
+
+                        $enable.show();
+                        $disable.hide();
+                    }
+                }
+
+            })
+        }
+    </script>
 @endsection
