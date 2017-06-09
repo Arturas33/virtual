@@ -12,5 +12,6 @@ return [
     'no_data' => 'Nera duomenu',
     'active' => 'ijungti',
     'disable' => 'išjungti',
+    'language_codes_list' => 'Kalbų sąrašas'
 
 ];
