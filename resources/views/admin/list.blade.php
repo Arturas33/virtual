@@ -1,6 +1,13 @@
 @extends('admin.core')
 @section('content')
     <div id='list'>
+
+        <div><h3>{{ $title }} </h3></div>
+        <div> @if(isset($create))
+                <a class="btn btn-success" href="{{route($create)}}"> New one </a>
+            @endif
+        </div>
+
         <div class="container">
             @if(sizeof($list) > 0 )
                 <table class="table table-hover">
