@@ -13,9 +13,15 @@
                 <table class="table table-hover">
                     <h3>{{ trans('app.language_codes_list') }}</h3>
                     <tr>
+
                         @foreach($list[0] as $key => $value)
                             <th> {{$key}}</th>
+
                         @endforeach
+                        @if(isset($edit))
+                        <th>Edit</th>
+                        <th>Delete</th>
+                            @endif
                     </tr>
                     <tr>
                     @foreach($list as $record)
@@ -51,6 +57,21 @@
 
                             @endforeach
 
+                                @if(isset($edit))
+
+                                    <td>
+                                        <a href="{{ route($edit, $record['id']) }}">
+                                            <button type="button" class="btn btn-primary">Edit</button>
+                                        </a>
+                                    </td>
+
+                                    <td>
+                                        <button onclick="deleteItem( '{{ route($delete, $record['id']) }}' )"
+                                                class="btn btn-danger">Delete
+                                        </button>
+                                    </td>
+                                @endif
+
                         </tr>
                     @endforeach
 
@@ -79,6 +100,8 @@
                 data: {
                     is_active: value
                 },
+
+
                 success: function (response) {
 
 //                  console.log($('#' + response.id))
@@ -113,5 +136,20 @@
 
             })
         }
+        function deleteItem(route) {
+            $.ajax({
+                url: route,
+                type: 'DELETE',
+                dataType: 'json',
+                success: function (response) {
+                    $('#' + response.id).remove();
+                },
+                error: function () {
+                    alert('ERROR')
+                }
+            });
+        }
+
+
     </script>
 @endsection
