@@ -40,6 +40,10 @@
                                                     class="btn btn-danger">{{trans('app.disable')}}</button>
                                         @endif
                                     </td>
+
+                                @elseif($key == 'translations')
+
+                                    <td>{{$value['name']. ' ' . $value['language_code']}}</td>
                                 @else
                                     <td>{{$value}}</td>
                                 @endif
