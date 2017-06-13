@@ -15,7 +15,7 @@ class VrMenuController extends Controller
 
     public function frontendIndex()
     {
-       //
+        //
     }
 
 
@@ -27,7 +27,16 @@ class VrMenuController extends Controller
      */
     public function index()
     {
-       //
+        $config['tableName'] = trans('app.adminMenu');
+        $config['list'] = VrMenu::get()->toArray();
+        $config['route'] = route('app.menu.create');
+        $config['create'] = 'app.menu.create';
+        $config['edit'] = 'app.menu.edit';
+
+        $config['delete'] = 'app.menu.destroy';
+
+       
+        return view('admin.menu', $config);
     }
 
     /**
@@ -38,9 +47,9 @@ class VrMenuController extends Controller
      */
     public function create()
     {
-        $config = $this->getFormData();
-
-        return view('admin.menu', $config);
+//        $config = $this->getFormData();
+//
+//        return view('admin.menu', $config);
     }
 
     /**
@@ -53,7 +62,7 @@ class VrMenuController extends Controller
 
     public function store(Request $request)
     {
-//       //
+        //
 
     }
 
@@ -66,7 +75,7 @@ class VrMenuController extends Controller
      */
     public function show($id)
     {
-       //
+        //
     }
 
     /**
@@ -78,7 +87,7 @@ class VrMenuController extends Controller
      */
     public function edit($id)
     {
-      //
+        //
     }
 
     /**
@@ -103,31 +112,31 @@ class VrMenuController extends Controller
     public function destroy($id)
     {
 
-       //
+        //
     }
 
     private function listBladeData()
     {
-
-        $config['fields'][]=[
-            'type'=>'drop_down',
-            'key'=>'language_code',
-            'options'=>getActiveLanguages()
-        ];
-        $config['fields'][]=[
-            'type'=>'single_line',
-            'key' => 'name',
-        ];
-         $config['fields'][]=[
-           'type'=>'single_line',
-             'key'=>'url'
-         ];
-        $config['fields'][]=[
-            'type'=>'check_box',
-            'key'=>'new_windows',
-            'options'
-        ];
-
-        return $config;
+//
+//        $config['fields'][]=[
+//            'type'=>'drop_down',
+//            'key'=>'language_code',
+//            'options'=>getActiveLanguages()
+//        ];
+//        $config['fields'][]=[
+//            'type'=>'single_line',
+//            'key' => 'name',
+//        ];
+//         $config['fields'][]=[
+//           'type'=>'single_line',
+//             'key'=>'url'
+//         ];
+//        $config['fields'][]=[
+//            'type'=>'check_box',
+//            'key'=>'new_windows',
+//            'options'
+//        ];
+//
+//        return $config;
     }
 }
