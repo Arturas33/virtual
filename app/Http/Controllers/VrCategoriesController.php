@@ -122,7 +122,7 @@ class VrCategoriesController extends Controller
 
     private function getFormData()
     {
-        $config = [];
+
         $config['fields'][]=[
             'type'=>'drop_down',
             'key'=>'language_code',
