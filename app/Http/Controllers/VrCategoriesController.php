@@ -22,7 +22,6 @@ class VrCategoriesController extends Controller
         $config['list'] = VrCategories::get()->toArray();
         $config['create'] = 'app.categories.create';
         $config['title'] = trans('app.category_list');
-        $config['new'] = '';
         return view('admin.list', $config);
     }
 
@@ -34,20 +33,13 @@ class VrCategoriesController extends Controller
      */
     public function create()
     {
-        $config = [];
+
+        $config = $this->getFormData();
         $config['tableName'] =  trans('app.adminCategories');
-        $config['language'] = getActiveLanguages();
-        $config['route'] = 'app.categories.create';
-        $config['fields'][]=[
-            'type'=>'drop_down',
-            'key'=>'language_code',
-            'options'=>getActiveLanguages()
-        ];
-        $config['fields'][]=[
-            'type'=>'single_line',
-            'key' => 'name',
-        ];
-      //  dd($config);
+        $config['route'] = route('app.categories.create');
+
+
+       // dd($config);
         return view('admin.form', $config );
     }
 
@@ -64,7 +56,7 @@ class VrCategoriesController extends Controller
         $data['record_id']= $record -> id;
         VrCategoriesTranslations::create($data);
 
-        return redirect(route('app.categories.edit',[$record->id]));
+        return redirect(route('app.categories.edit',$record->id));
     }
 
     /**
@@ -88,7 +80,13 @@ class VrCategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $record = VrCategories::find($id)->toArray();
+        $config = $this->getFormData();
+        $config['tableName'] = $id ;
+        $config['route'] = route('app.categories.create', $id);
+
+        return view('admin.form', $config);
     }
 
     /**
@@ -117,6 +115,17 @@ class VrCategoriesController extends Controller
 
     private function getFormData()
     {
-        //
+        $config = [];
+        $config['fields'][]=[
+            'type'=>'drop_down',
+            'key'=>'language_code',
+            'options'=>getActiveLanguages()
+        ];
+        $config['fields'][]=[
+            'type'=>'single_line',
+            'key' => 'name',
+        ];
+
+        return $config;
     }
 }
