@@ -3,7 +3,6 @@
 namespace App\Models;
 
 
-
 class VrCategories extends CoreModel
 {
     use UuidTrait;
@@ -19,6 +18,11 @@ class VrCategories extends CoreModel
      */
     protected $fillable = ['id', 'comment'];
 
+    protected $with = ['translations'];
 
+    public function translations()
+    {
 
+        return $this->hasOne(VrCategoriesTranslations::class, 'record_id', 'id')->where('language_code', app()->getLocale());
+    }
 }
