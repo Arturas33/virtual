@@ -8,7 +8,7 @@
 
 
 
-    {!! Form::open(['url' => route($route)]) !!}
+    {!! Form::open(['url' => $route])!!}
 
     @foreach($fields as $field)
         @if($field['type']== 'drop_down')
