@@ -22,4 +22,7 @@ return [
     'name'=>'Pavadinimas',
     'url'=>'Nuoroda',
     'new_windows'=>'Atidaryti naujam lange',
+    'sequence' => 'Eiliskumas',
+    'adminMenu'=>'Meniu sąrašas',
+    'new_window' =>'Naujas langas',
 ];
