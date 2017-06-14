@@ -18,5 +18,8 @@ return [
     'pages_list' => 'Puslapių sąrašas',
     'users_list' => 'Vartotojų sąrašas',
     'admin_menu' => 'Menių sąrašas',
-
+    'select'=>'Pasirinkite',
+    'name'=>'Pavadinimas',
+    'url'=>'Nuoroda',
+    'new_windows'=>'Atidaryti naujam lange',
 ];
