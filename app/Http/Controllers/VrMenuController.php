@@ -27,16 +27,17 @@ class VrMenuController extends Controller
      */
     public function index()
     {
+
         $config['list'] = VrMenu::get()->toArray();
-        $config['tableName'] = trans('app.adminMenu');
+        $config['title'] = trans('app.adminMenu');
         $config['route'] = route('app.menu.create');
         $config['create'] = 'app.menu.create';
 
         $config['edit'] = 'app.menu.edit';
         $config['delete'] = 'app.menu.destroy';
 
-       
-        return view('admin.form', $config);
+
+        return view('admin.list', $config);
     }
 
     /**
@@ -48,7 +49,7 @@ class VrMenuController extends Controller
     public function create()
     {
         $config = $this->getFormData();
-        $config['route']= route('app.menu.create');
+        $config['route'] = route('app.menu.create');
         $config['back'] = 'app.menu.index';
 
         return view('admin.form', $config);
@@ -64,7 +65,16 @@ class VrMenuController extends Controller
 
     public function store(Request $request)
     {
-        //
+
+        $data = request()->all();
+        $record = VrMenu::create($data);
+        $data['record_id'] = $record->id;
+        VrMenuTranslations::create($data);
+
+        // dd($record);
+
+        return redirect(route('app.menu.edit', $record->id));
+
 
     }
 
@@ -120,27 +130,44 @@ class VrMenuController extends Controller
     private function getFormData()
     {
 
-        $config['fields'][]=[
-            'type'=>'drop_down',
-            'key'=>'language_code',
-            'options'=>getActiveLanguages()
+        $config['fields'][] = [
+            'type' => 'drop_down',
+            'key' => 'language_code',
+            'options' => getActiveLanguages()
         ];
-        $config['fields'][]=[
-            'type'=>'single_line',
+        $config['fields'][] = [
+            'type' => 'single_line',
             'key' => 'name',
         ];
-         $config['fields'][]=[
-           'type'=>'single_line',
-             'key'=>'url'
-         ];
-        $config['fields'][]=[
-            'type'=>'check_box',
-            'key'=>'new_windows',
-            'options'=>[
-                'key'=>'value'
-            ]
+        $config['fields'][] = [
+            'type' => 'single_line',
+            'key' => 'url'
         ];
 
+        $config['fields'][] = [
+            'type' => 'single_line',
+            'key' => 'sequence'
+        ];
+
+        $config['fields'][] = [
+            'type' => 'check_box',
+            'key' => 'new_window',
+            'options' => [
+                [
+                    'name' => 'new_window',
+                    'value' => 1,
+                    'title' => trans('app.new_window'),
+                ],
+
+            ]
+
+        ];
+        $config['fields'][] = [
+            "type" => "drop_down",
+            "key" => "parent_id",
+            "label" => trans('app.adminParent'),
+            "options" => VrMenuTranslations::pluck('name', 'record_id'),
+          ];
         return $config;
     }
 }
