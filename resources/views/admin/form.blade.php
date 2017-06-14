@@ -20,11 +20,12 @@
 
             @elseif($field['type'] == 'check_box')
 
+                @foreach($field['options'] as $option)
 
-                {{ Form::label($field['key'], trans('app.' . $field['key'])) }}
-                {{Form::checkbox('key', 'value')}}
+                {{ Form::label($option['title']) }}
+                {{Form::checkbox($option['name'], $option['value'])}}
                 <br>
-
+                @endforeach
 
 
             @endif
