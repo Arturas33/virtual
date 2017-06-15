@@ -12,7 +12,7 @@ return [
     'no_data' => 'Nera duomenu',
     'active' => 'ijungti',
     'disable' => 'išjungti',
-    'language_codes_list' => 'Kalbų sąrašas',
+    'language_code' => 'Kalbų sąrašas',
     'category_list' => 'Kategorijų sąrašas',
     'orders_list' => 'Užsakymų sąrašas',
     'pages_list' => 'Puslapių sąrašas',
@@ -25,4 +25,5 @@ return [
     'sequence' => 'Eiliskumas',
     'adminMenu'=>'Meniu sąrašas',
     'new_window' =>'Naujas langas',
+    'parent_id' => 'Priklauso'
 ];

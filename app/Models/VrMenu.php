@@ -18,7 +18,11 @@ class VrMenu extends CoreModel
      */
     protected $fillable = ['id', 'new_window', 'sequence', 'vr_parent_id'];
 
+    public function translations()
+    {
 
+        return $this->hasOne(VrMenuTranslations::class, 'record_id', 'id')->where('language_code', app()->getLocale());
+    }
 
 
 }
