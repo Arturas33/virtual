@@ -11,18 +11,29 @@
             @if($field['type']== 'drop_down')
                 @if($field['key'] == 'language_code')
 
-                {{Form::select($field['key'],$field ['options'] )}}
-                <br>
+
+
+
+
+                        {{Form::select($field['key'],$field ['options'] )}}
+                    <br>
+
+
                 @else
                     {{Form::select($field['key'],$field ['options'], null,['placeholder'] )}}
                     <br>
                 @endif
+
             @elseif($field['type'] == 'single_line')
 
 
+                @if(isset($record[$field['key']]))
+                    {{Form::text($field['key'], $record[$field['key']])}}
+                @else
+                    {{Form::text($field['key'])}}
+                    <br>
+                @endif
 
-                {{Form::text($field['key'])}}
-                <br>
 
             @elseif($field['type'] == 'check_box')
 
@@ -46,13 +57,12 @@
     <script>
 
         $('#language_code').bind(
-            'change' , function () {
+            'change', function () {
 
-                window.location.href = '?language_code='+$('#language_code').val();
+                window.location.href = '?language_code=' + $('#language_code').val();
                 $('#language_code').val()
             }
         )
-
 
 
         // console.log($('#language_code'));
