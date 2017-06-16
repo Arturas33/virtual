@@ -25,5 +25,12 @@ return [
     'sequence' => 'Eiliskumas',
     'adminMenu'=>'Meniu sąrašas',
     'new_window' =>'Naujas langas',
-    'parent_id' => 'Priklauso'
+    'parent_id' => 'Priklauso',
+    'title' => 'Antrašte',
+    'description_short' => 'Trumpas aprašymas',
+    'description_long' => 'Ilgas aprašymas',
+    'category_id' => 'Kategorjos',
+     'adminPages' => 'Puslapiai',
+    'slug'=>'Nuoroda',
+
 ];
