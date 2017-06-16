@@ -48,8 +48,14 @@
                                     </td>
 
                                 @elseif($key == 'translations')
-
+                                    @if(isset($value['name']))
+                                        <td></td>
                                     <td>{{$value['name']. ' ' . $value['language_code']}}</td>
+                                        @endif
+                                    @if(isset($value['title']))
+                                            <td>{{$value['title']. ' ' . $value['language_code']}}</td>
+                                        @else <td></td>
+                                        @endif
                                 @else
                                     <td>{{$value}}</td>
                                 @endif

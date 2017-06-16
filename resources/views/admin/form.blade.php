@@ -8,27 +8,57 @@
 
         @foreach($fields as $field)
             {{ Form::label($field['key'], trans('app.' . $field['key'])) }}
+
+
+
             @if($field['type']== 'drop_down')
-                @if($field['key'] == 'language_code')
+                @if(isset($record[$field['key']]))
+                    @if($field['key'] == 'language_code')
 
+                        {{Form::select($field['key'], $field ['options'], $record[$field['key']] )}}
+                        <br>
+                    @else
 
+                        {{Form::select($field['key'],$field ['options'],$record[$field['key']] , null,['placeholder'] )}}
+                        <br>
 
-
-
-                        {{Form::select($field['key'],$field ['options'] )}}
-                    <br>
-
-
+                    @endif
                 @else
-                    {{Form::select($field['key'],$field ['options'], null,['placeholder'] )}}
-                    <br>
+
+
+
+                    @if($field['key'] == 'language_code')
+
+                        {{Form::select($field['key'], $field ['options'])}}
+                        <br>
+                    @else
+
+                        {{Form::select($field['key'],$field ['options'], null,['placeholder'] )}}
+                        <br>
+
+                    @endif
+
+
+
                 @endif
+
+
 
             @elseif($field['type'] == 'single_line')
 
-
                 @if(isset($record[$field['key']]))
-                    {{Form::text($field['key'], $record[$field['key']])}}
+                    @if($field['key'] == 'description_long')
+                        {{Form::textarea($field['key'], $record[$field['key']])}}
+                        <br>
+                    @else
+                        {{Form::text($field['key'],$record[$field['key']])}}
+                        <br>
+                    @endif
+                @endif
+
+                @if($field['key']=='description_long')
+                    {{Form::textarea($field['key'])}}
+                    <br>
                 @else
                     {{Form::text($field['key'])}}
                     <br>
@@ -37,16 +67,27 @@
 
             @elseif($field['type'] == 'check_box')
 
-                @foreach($field['options'] as $option)
+                @if(isset($record[$field['key']]))
 
-                    {{Form::checkbox($option['name'], $option['value'])}}
-                    <br>
-                @endforeach
+                    @foreach($field['options'] as $option)
+                        {{Form::checkbox($option['name'], $option['value'], $record[$field['key']])}}
+                        <br>
+                    @endforeach
+
+                @else
+
+                    @foreach($field['options'] as $option)
+                        {{Form::checkbox($option['name'], $option['value'])}}
+                        <br>
+                    @endforeach
+                @endif
 
 
             @endif
 
+
         @endforeach
+
 
         {{ Form::submit('Create') }}
         {!! Form::close() !!}
