@@ -63,7 +63,7 @@ class VrMenuController extends Controller
      */
 
 
-    public function store(Request $request)
+    public function store()
     {
 
         $data = request()->all();
