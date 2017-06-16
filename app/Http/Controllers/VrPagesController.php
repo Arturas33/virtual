@@ -18,18 +18,19 @@ class VrPagesController extends Controller {
 
 	public function index()
 	{
-       //
+       $config['list'] = VrPages::get()->toArray();
+       $config['title'] = trans('app.adminPages');
+       $config['route'] = route('app.pages.create');
+       $config['create'] = 'app.pages.create';
+
+       $config['edit'] = 'app.pages.edit';
+       $config['delete'] = 'app.pages.destroy';
+
+       //dd($config);
+
+       return view('admin.list', $config);
+
 	}
-
-	public function indexFrontEnd($slug)
-    {
-        //
-    }
-
-    public function indexFrontEndEn($slug)
-    {
-        //
-    }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -39,7 +40,13 @@ class VrPagesController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		$config = $this -> getFormData();
+		$config['route'] = route('app.pages.create');
+		$config['back'] = 'app.pages.index';
+
+		//dd($config);
+
+        return view('admin.form', $config);
 	}
 
 	/**
@@ -50,7 +57,13 @@ class VrPagesController extends Controller {
 	 */
 	public function store()
 	{
-      //
+      $data = request()->all();
+      $record = VrPages::create($data);
+      $data['record_id'] = $record->id;
+      VrPagesTranslations::create($data);
+
+
+      return redirect(route('app.pages.edit', $record->id ));
     }
 
 	/**
@@ -101,8 +114,45 @@ class VrPagesController extends Controller {
         //
 	}
 
-    private function listBladeData()
+    private function getFormData()
     {
-       //
+
+        $language = request('language_code');
+        if ($language == null)
+            $language = app()->getLocale();
+
+
+        $config['fields'][] = [
+            'type' => 'drop_down',
+            'key' => 'language_code',
+            'options' => getActiveLanguages()
+        ];
+        $config['fields'][] = [
+            'type' => 'single_line',
+            'key' => 'title',
+        ];
+        $config['fields'][] = [
+            'type' => 'single_line',
+            'key' => 'description_short'
+        ];
+
+        $config['fields'][] = [
+            'type' => 'single_line',
+            'key' => 'description_long'
+        ];
+
+        $config['fields'][] = [
+            'type' => 'single_line',
+            'key' => 'slug'
+        ];
+        $config['fields'][] = [
+            "type" => "drop_down",
+            "key" => "category_id",
+            "label" => trans('app.adminCategory'),
+            "options" => VrCategoriesTranslations::where('language_code', $language)->pluck('name', 'record_id'),
+        ];
+        return $config;
     }
+
+
 }
