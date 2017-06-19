@@ -26,6 +26,7 @@ class VrUsers extends Authenticatable
 
     protected $fillable = ['id', 'name', 'email', 'password', 'phone'];
 
+    protected $with = ['role'];
     /**
      * $hidden is table 'vr_users' fields is hidden
      */
@@ -34,10 +35,14 @@ class VrUsers extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function role() {
+    public function roles() {
         return $this->belongsToMany(VrRoles::class, 'vr_connections_users_roles', 'user_id', 'role_id' );
     }
 
+    public function role(){
+
+        return $this->hasOne(VrConnUserRoles::class, 'user_id', 'id');
+    }
 
 
 
