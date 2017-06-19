@@ -15,24 +15,25 @@
                 @if(isset($record[$field['key']]))
                     @if($field['key'] == 'language_code' || $field['key'] == 'category_id' )
 
+                        <div class="form-group">
                         {{Form::select($field['key'], $field ['options'], $record[$field['key']] )}}
-                        <br>
+                        </div>
                     @else
-
+                        <div class="form-group">
                         {{Form::select($field['key'],$field ['options'], $record[$field['key']], ['placeholder' =>''] )}}
-                        <br>
+                        </div>
 
                     @endif
                 @else
 
                     @if($field['key'] == 'language_code' || $field['key'] == 'category_id')
-
+                        <div class="form-group">
                         {{Form::select($field['key'], $field ['options'])}}
-                        <br>
+                        </div>
                     @else
-
+                        <div class="form-group">
                         {{Form::select($field['key'],$field ['options'], null, ['placeholder' =>''] )}}
-                        <br>
+                        </div>
 
                     @endif
 
@@ -46,20 +47,24 @@
 
                 @if(isset($record[$field['key']]))
                     @if($field['key'] == 'description_long')
+                        <div class="form-group">
                         {{Form::textarea($field['key'], $record[$field['key']])}}
-                        <br>
+                        </div>
                     @else
+                        <div class="form-group">
                         {{Form::text($field['key'],$record[$field['key']])}}
-                        <br>
+                        </div>
                     @endif
                 @else
 
                     @if($field['key']=='description_long')
+                        <div class="form-group">
                         {{Form::textarea($field['key'])}}
-                        <br>
+                        </div>
                     @else
+                        <div class="form-group">
                         {{Form::text($field['key'])}}
-                        <br>
+                        </div>
                     @endif
                 @endif
 
@@ -68,15 +73,17 @@
                 @if(isset($record[$field['key']]))
 
                     @foreach($field['options'] as $option)
+                        <div class="form-group">
                         {{Form::checkbox($option['name'], $option['value'], $record[$field['key']])}}
-                        <br>
+                        </div>
                     @endforeach
 
                 @else
 
                     @foreach($field['options'] as $option)
+                        <div class="form-group">
                         {{Form::checkbox($option['name'], $option['value'])}}
-                        <br>
+                        </div>
                     @endforeach
                 @endif
 
@@ -84,12 +91,14 @@
 
             @elseif($field['type'] == 'file')
                 @if(isset($record[$field['key']]))
-
+                    <div class="form-group">
                     {{Form::file('file'),$record[$field['key']]}}
+                    </div>
 
                 @else
-
+                    <div class="form-group">
                     {{Form::file('file')}}
+                    </div>
 
                 @endif
 
