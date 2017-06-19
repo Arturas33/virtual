@@ -124,6 +124,13 @@ class VrUsersController extends Controller
      * @return Response
      */
 
+    public function destroy($id)
+    {
+        VrConnUserRoles::where('user_id', $id)->delete();
+        VrUsers::destroy($id);
+        return ["success" => true, "id" => $id];
+    }
+
     private function getFormData()
     {
 
