@@ -32,6 +32,11 @@ return [
     'category_id' => 'Kategorjos',
      'adminPages' => 'Puslapiai',
     'slug'=>'Nuoroda',
-    'language_codes_list' =>'Kalbu sąrašas',
+    'language_codes_list' =>'Sąrašas',
+    'email' => 'El paštas',
+    'password' => 'Slaptažodis',
+    'phone' => 'Telefonas',
+    'role_id' => 'Roles',
+    'cover_id'=> 'Paveiksliukas',
 
 ];
