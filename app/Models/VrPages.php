@@ -30,7 +30,7 @@ class VrPages extends CoreModel
             $language = app()->getLocale();
 
         return $this->hasOne(VrPagesTranslations::class, 'record_id', 'id')->where('language_code', $language);
-      //  return $this->hasMany(VrCategories::class, 'record_id', 'id')->where('language_code', $language);
+
     }
 
 
