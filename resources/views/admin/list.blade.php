@@ -49,17 +49,22 @@
 
                                 @elseif($key == 'translations')
                                     @if(isset($value['name']))
-                                        <td></td>
+
                                     <td>{{$value['name']. ' ' . $value['language_code']}}</td>
+                                        
                                         @endif
                                     @if(isset($value['title']))
+                                        <td></td>
                                             <td>{{$value['title']. ' ' . $value['language_code']}}</td>
-                                        @else <td></td>
+                                        @else
                                         @endif
+
+                                @elseif($key == 'role')
+                                <td>{{$value['role_id']}}}</td>
+
                                 @else
                                     <td>{{$value}}</td>
                                 @endif
-
 
                             @endforeach
 
