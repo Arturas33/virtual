@@ -175,7 +175,7 @@ class VrPagesController extends Controller
             "type" => "drop_down",
             "key" => "category_id",
             "label" => trans('app.adminCategory'),
-            "options" => VrCategoriesTranslations::where('language_code', $language)->pluck('name', 'record_id')->toArray(),
+            "options" => VrCategoriesTranslations::where('language_code', $language)->pluck('name', 'record_id'),
         ];
         return $config;
     }
