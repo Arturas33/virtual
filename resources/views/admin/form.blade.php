@@ -4,7 +4,7 @@
     <div id="list">
 
 
-        {!! Form::open(['url' => $route])!!}
+        {!! Form::open(['url' => $route, 'files' => true])!!}
 
         @foreach($fields as $field)
             {{ Form::label($field['key'], trans('app.' . $field['key'])) }}
@@ -13,27 +13,25 @@
 
             @if($field['type']== 'drop_down')
                 @if(isset($record[$field['key']]))
-                    @if($field['key'] == 'language_code')
+                    @if($field['key'] == 'language_code' || $field['key'] == 'category_id' )
 
                         {{Form::select($field['key'], $field ['options'], $record[$field['key']] )}}
                         <br>
                     @else
 
-                        {{Form::select($field['key'],$field ['options'],$record[$field['key']] , null,['placeholder'] )}}
+                        {{Form::select($field['key'],$field ['options'], $record[$field['key']], ['placeholder' =>''] )}}
                         <br>
 
                     @endif
                 @else
 
-
-
-                    @if($field['key'] == 'language_code')
+                    @if($field['key'] == 'language_code' || $field['key'] == 'category_id')
 
                         {{Form::select($field['key'], $field ['options'])}}
                         <br>
                     @else
 
-                        {{Form::select($field['key'],$field ['options'], null,['placeholder'] )}}
+                        {{Form::select($field['key'],$field ['options'], null, ['placeholder' =>''] )}}
                         <br>
 
                     @endif
@@ -54,16 +52,16 @@
                         {{Form::text($field['key'],$record[$field['key']])}}
                         <br>
                     @endif
-                @endif
-
-                @if($field['key']=='description_long')
-                    {{Form::textarea($field['key'])}}
-                    <br>
                 @else
-                    {{Form::text($field['key'])}}
-                    <br>
-                @endif
 
+                    @if($field['key']=='description_long')
+                        {{Form::textarea($field['key'])}}
+                        <br>
+                    @else
+                        {{Form::text($field['key'])}}
+                        <br>
+                    @endif
+                @endif
 
             @elseif($field['type'] == 'check_box')
 
@@ -83,7 +81,24 @@
                 @endif
 
 
+
+            @elseif($field['type'] == 'file')
+                @if(isset($record[$field['key']]))
+
+                    {{Form::file('file'),$record[$field['key']]}}
+
+                @else
+
+                    {{Form::file('file')}}
+
+                @endif
+
             @endif
+
+
+
+
+
 
 
         @endforeach
