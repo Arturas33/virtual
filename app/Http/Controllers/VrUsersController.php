@@ -1,8 +1,11 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\VrConnUserRoles;
 use App\Models\VrOrder;
+use App\Models\VrRoles;
 use App\Models\VrUsers;
 use Illuminate\Routing\Controller;
+use Illuminate\Routing\Route;
 use Ramsey\Uuid\Uuid;
 
 class VrUsersController extends Controller
@@ -16,9 +19,15 @@ class VrUsersController extends Controller
      */
     public function index()
     {
+        $config['list'] = VrUsers::get()->toArray();
         $config['title'] = trans('app.users_list');
-    }
+        $config['route'] = route('app.users.create');
+        $config['create'] = 'app.users.create';
+        $config['edit'] = 'app.users.edit';
+        $config['delete'] = 'app.users.destroy';
 
+        return view('admin.list', $config);
+    }
 
 
     /**
@@ -29,7 +38,14 @@ class VrUsersController extends Controller
      */
     public function create()
     {
-       //
+        $config = $this->getFormData();
+
+//        $config['title'] = trans('app.users.create');
+        $config['route'] = route('app.users.create');
+        $config['back'] = 'app.user.index';
+
+        return view('admin.form', $config);
+
     }
 
     /**
@@ -40,7 +56,19 @@ class VrUsersController extends Controller
      */
     public function store()
     {
-      //
+        $data = request()->all();
+        $data['id'] = Uuid::uuid4();
+        $data['password'] = bcrypt($data['password']);
+
+        $record = VrUsers::create($data);
+
+        $data['user_id'] = $record->id;
+        VrConnUserRoles::create($data);
+
+
+        return redirect()->route('app.users.edit', $record->id);
+
+
     }
 
     /**
@@ -52,7 +80,7 @@ class VrUsersController extends Controller
      */
     public function show($id)
     {
-       //
+        //
     }
 
     /**
@@ -64,7 +92,16 @@ class VrUsersController extends Controller
      */
     public function edit($id)
     {
-       //
+        $record = VrUsers::find($id)->toArray();
+        $record['role_id'] = $record['role']['role_id'];
+        $config = $this->getFormData();
+        $config['record'] = $record;
+        $config['route'] = route('app.users.create');
+        $config['back'] = 'app.user.index';
+
+
+        return view('admin.form', $config);
+
     }
 
     /**
@@ -76,7 +113,7 @@ class VrUsersController extends Controller
      */
     public function update($id)
     {
-       //
+        //
     }
 
     /**
@@ -86,18 +123,32 @@ class VrUsersController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function destroy($id)
-    {
-        //
-    }
 
-    private function listBladeData()
+    private function getFormData()
     {
-        $config = [];
-        $config['show'] = 'app.users.show';
-        $config['create'] = 'app.users.create';
-        $config['delete'] = 'app.users.destroy';
-        $config['edit'] = 'app.users.edit';
+
+        $config['fields'][] = [
+            'type' => 'single_line',
+            'key' => 'name',
+        ];
+        $config['fields'][] = [
+            'type' => 'single_line',
+            'key' => 'email',
+        ];
+        $config['fields'][] = [
+            'type' => 'single_line',
+            'key' => 'password',
+        ];
+        $config['fields'][] = [
+            'type' => 'single_line',
+            'key' => 'phone',
+        ];
+        $config['fields'][] = [
+            'type' => 'drop_down',
+            'key' => 'role_id',
+            'options' => VrRoles::pluck('name', 'id'),
+
+        ];
         return $config;
     }
 
