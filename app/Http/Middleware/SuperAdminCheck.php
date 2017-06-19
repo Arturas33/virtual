@@ -22,8 +22,7 @@ class SuperAdminCheck
      */
     public function handle($request, Closure $next)
     {
-       // dd(auth()->user()->role->pluck('id')->toArray());
-        if (in_array('super-admin', auth()->user()->role->pluck('id')->toArray())) {
+        if (in_array('super-admin', auth()->user()->role->pluck('role_id')->toArray())) {
             return $next($request);
         } else {
             abort(403, 'Access denied');
