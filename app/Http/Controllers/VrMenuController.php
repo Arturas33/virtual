@@ -138,9 +138,12 @@ class VrMenuController extends Controller
      */
     public function destroy($id)
     {
-
-        //
+        VrMenuTranslations::destroy(VrMenuTranslations::where('record_id', $id)->pluck('id')->toArray());
+        VrMenu::destroy($id);
+        return ["success" => true, "id" => $id];
     }
+
+
 
     private function getFormData()
     {
