@@ -32,5 +32,6 @@ return [
     'category_id' => 'Kategorjos',
      'adminPages' => 'Puslapiai',
     'slug'=>'Nuoroda',
+    'language_codes_list' =>'Kalbu sąrašas',
 
 ];
