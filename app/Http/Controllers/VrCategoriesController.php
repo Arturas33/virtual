@@ -22,6 +22,8 @@ class VrCategoriesController extends Controller
         $config['list'] = VrCategories::get()->toArray();
         $config['create'] = 'app.categories.create';
         $config['title'] = trans('app.category_list');
+
+        $config['show'] = 'app.categories.show';
         $config['delete'] = 'app.categories.destroy';
         $config['edit'] = 'app.categories.edit';
 

@@ -33,6 +33,7 @@ class VrMenuController extends Controller
         $config['route'] = route('app.menu.create');
         $config['create'] = 'app.menu.create';
 
+        $config['show'] = 'app.menu.show';
         $config['edit'] = 'app.menu.edit';
         $config['delete'] = 'app.menu.destroy';
 

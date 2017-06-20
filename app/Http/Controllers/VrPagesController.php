@@ -24,6 +24,7 @@ class VrPagesController extends Controller
         $config['route'] = route('app.pages.create');
         $config['create'] = 'app.pages.create';
 
+        $config['show'] = 'app.pages.show';
         $config['edit'] = 'app.pages.edit';
         $config['delete'] = 'app.pages.destroy';
 
@@ -80,7 +81,7 @@ class VrPagesController extends Controller
      */
     public function show($id)
     {
-        //
+       //
     }
 
     /**
@@ -98,14 +99,17 @@ class VrPagesController extends Controller
         $record['title'] = $record['translations']['title'];
         $record['language_code'] = $record['translations']['language_code'];
         $record['description_short'] = $record['translations']['description_short'];
-        $record['description_long'] = $record ['translations']['description_long'];
+        $record['description_long'] = $record['translations']['description_long'];
+        $record['upload'] = $record['upload']['path'];
+       /// dd($record);
+
 
         $config = $this->getFormData();
         $config['record'] = $record;
         $config['titleForm'] = $id;
         $config['route'] = route('app.pages.create');
         $config['back'] = 'app.pages.index';
-       //dd($config);
+      // dd($config);
         return view('admin.form', $config);
     }
 
@@ -130,6 +134,7 @@ class VrPagesController extends Controller
      */
     public function destroy($id)
     {
+
         VrPagesTranslations::destroy(VrPagesTranslations::where('record_id', $id)->pluck('id')->toArray());
         VrPages::destroy($id);
         return ["success" => true, "id" => $id];
@@ -176,6 +181,10 @@ class VrPagesController extends Controller
             "key" => "category_id",
             "label" => trans('app.adminCategory'),
             "options" => VrCategoriesTranslations::where('language_code', $language)->pluck('name', 'record_id'),
+        ];
+        $config['fields'][] = [
+            "type" => "upload_form",
+            "key" => "upload",
         ];
         return $config;
     }

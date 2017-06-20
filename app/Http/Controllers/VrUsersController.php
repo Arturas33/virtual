@@ -23,6 +23,9 @@ class VrUsersController extends Controller
         $config['title'] = trans('app.users_list');
         $config['route'] = route('app.users.create');
         $config['create'] = 'app.users.create';
+
+
+        $config['show'] = 'app.users.show';
         $config['edit'] = 'app.users.edit';
         $config['delete'] = 'app.users.destroy';
 
