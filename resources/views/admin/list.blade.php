@@ -19,9 +19,10 @@
 
                         @endforeach
                         @if(isset($edit))
-                        <th>Edit</th>
-                        <th>Delete</th>
-                            @endif
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>Show</th>
+                        @endif
                     </tr>
                     <tr>
                     @foreach($list as $record)
@@ -48,40 +49,57 @@
                                     </td>
 
                                 @elseif($key == 'translations')
-                                    @if(isset($value['name']))
 
-                                    <td>{{$value['name']. ' ' . $value['language_code']}}</td>
-                                        
-                                        @endif
-                                    @if(isset($value['title']))
-                                        <td></td>
+                                    @if(isset($value['name']) || isset($value['title']))
+
+                                        @if(isset($value['name']))
+                                            <td>{{$value['name']. ' ' . $value['language_code']}}</td>
+                                        @elseif(isset($value['title']))
                                             <td>{{$value['title']. ' ' . $value['language_code']}}</td>
                                         @else
+                                            <td></td>
                                         @endif
+                                    @else
+                                        <td></td>
+                                    @endif
 
                                 @elseif($key == 'role')
-                                <td>{{$value['role_id']}}}</td>
+                                    <td>{{$value['role_id']}}}</td>
 
+                                @elseif($key == 'upload')
+                                    @if (isset ($value['path']))
+                                        <td><img src={{asset ($value['path'])}} , class="img-rounded" width="150" ></td>
+                                    @else
+                                        <td> </td>
+                                    @endif
                                 @else
                                     <td>{{$value}}</td>
                                 @endif
 
+
                             @endforeach
 
-                                @if(isset($edit))
+                            @if(isset($edit))
 
-                                    <td>
-                                        <a href="{{ route($edit, $record['id']) }}">
-                                            <button type="button" class="btn btn-primary">Edit</button>
-                                        </a>
-                                    </td>
 
-                                    <td>
-                                        <button onclick="deleteItem( '{{ route($delete, $record['id']) }}' )"
-                                                class="btn btn-danger">Delete
-                                        </button>
-                                    </td>
-                                @endif
+                                <td>
+                                    <a href="{{ route($edit, $record['id']) }}">
+                                        <button type="button" class="btn btn-primary">Edit</button>
+                                    </a>
+                                </td>
+
+                                <td>
+                                    <button onclick="deleteItem( '{{ route($delete, $record['id']) }}' )"
+                                            class="btn btn-danger">Delete
+                                    </button>
+                                </td>
+
+                                <td>
+                                    <a href="{{route($show, $record['id'])}}">
+                                        <button type="button" class="btn btn-success">Show</button>
+                                    </a>
+                                </td>
+                            @endif
 
                         </tr>
                     @endforeach
