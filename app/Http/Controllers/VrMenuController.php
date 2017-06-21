@@ -110,7 +110,7 @@ class VrMenuController extends Controller
         $config = $this->getFormData();
         $config['record'] = $record;
         $config['titleForm']= $id;
-        $config['route'] = route('app.menu.create', $id);
+        $config['route'] = route('app.menu.edit', $id);
         $config['back'] = 'app.menu.index';
 
 
@@ -181,13 +181,11 @@ class VrMenuController extends Controller
                     'value' => 1,
                     'title' => trans('app.new_window'),
                 ],
-
             ]
-
         ];
         $config['fields'][] = [
             "type" => "drop_down",
-            "key" => "parent_id",
+            "key" => "vr_parent_id",
             "label" => trans('app.adminParent'),
             "options" => VrMenuTranslations::where('language_code', $language)->pluck('name', 'record_id'),
           ];

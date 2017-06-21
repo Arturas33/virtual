@@ -87,7 +87,10 @@ class VrCategoriesController extends Controller
     {
 
         $record = VrCategories::find($id)->toArray();
+        $record['name'] = $record ['translations']['name'];
+        $record['language_code'] = $record ['translations']['language_code'];
         $config = $this->getFormData();
+        $config['record'] = $record;
         $config['tableName'] = $id ;
         $config['route'] = route('app.categories.create', $id);
 
