@@ -93,7 +93,7 @@
 
                 @if (isset ($record[$field['key']]))
 
-                    <td><img src={{asset ($record[$field['key']])}} , class="img-rounded" width="150"></td>
+                    <td><img src="{{asset ($record[$field['key']])}}" , class="img-rounded" width="150"></td>
                 @else
                     <td></td>
                 @endif

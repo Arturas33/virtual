@@ -66,7 +66,7 @@
 
                                 @elseif($key == 'upload')
                                     @if (isset ($value['path']))
-                                        <td><img src={{asset ($value['path'])}} , class="img-rounded" width="150"></td>
+                                        <td><img src="{{asset ($value['path'])}}" , class="img-rounded" width="150"></td>
                                     @else
                                         <td></td>
                                     @endif
