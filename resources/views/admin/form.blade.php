@@ -88,21 +88,6 @@
                 @endif
 
 
-            {{--@elseif($field['type'] == 'file')--}}
-                {{--@if(isset($record[$field['key']]))--}}
-                    {{--<div class="form-group">--}}
-                        {{--{{Form::file('file'),$record[$field['key']]}}--}}
-                    {{--</div>--}}
-
-                {{--@else--}}
-                    {{--<div class="form-group">--}}
-                        {{--{{Form::file('file')}}--}}
-                    {{--</div>--}}
-                {{--@endif--}}
-
-            {{--@endif--}}
-
-
 
             @elseif($field['type'] == 'upload_form')
 
@@ -113,7 +98,7 @@
                     <td></td>
                 @endif
                 <div class="form-group">
-                    {!! Form::file('image', null) !!}
+                    {!! Form::file('file', null) !!}
                 </div>
 
             @endif

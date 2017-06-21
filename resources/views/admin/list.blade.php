@@ -63,15 +63,16 @@
                                         <td></td>
                                     @endif
 
-                                @elseif($key == 'role')
-                                    <td>{{$value['role_id']}}}</td>
 
                                 @elseif($key == 'upload')
                                     @if (isset ($value['path']))
-                                        <td><img src={{asset ($value['path'])}} , class="img-rounded" width="150" ></td>
+                                        <td><img src={{asset ($value['path'])}} , class="img-rounded" width="150"></td>
                                     @else
-                                        <td> </td>
+                                        <td></td>
                                     @endif
+
+                                @elseif($key == 'role')
+                                    <td>{{$value['role_id']}}}</td>
                                 @else
                                     <td>{{$value}}</td>
                                 @endif

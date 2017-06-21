@@ -60,9 +60,10 @@ class VrPagesController extends Controller
     public function store()
     {
         $data = request()->all();
-        $resorces = request()->file('file');
+        $file = request()->file('file');
+
         $uploadController = new VrResourcesController();
-        $record = $uploadController->upload($resorces);
+        $record = $uploadController->upload($file);
         $data['cover_id'] = $record->id;
         $record = VrPages::create($data);
         $data['record_id'] = $record->id;
@@ -101,7 +102,7 @@ class VrPagesController extends Controller
         $record['description_short'] = $record['translations']['description_short'];
         $record['description_long'] = $record['translations']['description_long'];
         $record['upload'] = $record['upload']['path'];
-       /// dd($record);
+       // dd($record);
 
 
         $config = $this->getFormData();
@@ -148,11 +149,6 @@ class VrPagesController extends Controller
             $language = app()->getLocale();
 
 
-        $config['fields'][] = [
-            "type" => "file",
-            "key" => "cover_id",
-            "file" => VrResources::pluck('path', 'id')->toArray()
-        ];
         $config['fields'][] = [
             'type' => 'drop_down',
             'key' => 'language_code',
