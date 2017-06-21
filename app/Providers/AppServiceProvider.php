@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +15,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         require base_path('App/Http/helpers.php');
+
+        if(request()->segment(1) !== 'admin')
+        {
+            View::share('menu', getFrontEndMenu());
+        }
+
     }
 
     /**
