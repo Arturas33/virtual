@@ -61,11 +61,12 @@ class VrPagesController extends Controller
     public function store()
     {
         $data = request()->all();
-        $file = request()->file('file');
-        $uploadController = new VrResourcesController();
-       // dd($file);
+        dd($data);
+        $resources = request()->file('file');
 
-        $record = $uploadController->upload($file);
+        $uploadController = new VrResourcesController();
+
+        $record = $uploadController->upload($resources);
         $data['cover_id'] = $record->id;
 
 
@@ -128,7 +129,17 @@ class VrPagesController extends Controller
      */
     public function update($id)
     {
-        //
+        $data = request()->all();
+        $record = VrPages::find($id);
+        dd($record);
+        $record->update($data);
+        $data['record_id'] = $id;
+        VrPagesTranslations::updateOrCreate([
+            'record_id' => $id,
+            'language_code' => $data['language_code']
+        ],$data);
+
+        return redirect(route('app.pages.edit', $record->id));
     }
 
     /**
