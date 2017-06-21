@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\VrCategories;
+use App\Models\VrCategoriesTranslations;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -19,12 +20,17 @@ class VrCategoriesSeeder extends Seeder
     public function run()
     {
         $categories = [
-            ["id" => "about"], //section describing concept of activity
-            ["id" => "virtual-rooms"], //separate rooms themes
-            ["id" => "place-and-time"], //location of place
-            ["id" => "tickets"],
-            ["id" => "sponsors"],
-            ["id" => "footer"],
+
+            ["id" => "vr_rooms"], //separate rooms themes
+
+        ];
+        $categoriesTranslations =[
+
+            ['name'=>'Virtualūs kambariai', 'language_code'=>'lt', 'record_id'=>'vr_rooms'],
+            ['name'=>'Virtual rooms', 'language_code'=>'en', 'record_id'=>'vr_rooms'],
+            ['name'=>'Виртуальные номера', 'language_code'=>'ru', 'record_id'=>'vr_rooms'],
+            ['name'=>'virtuelle Räume', 'language_code'=>'de', 'record_id'=>'vr_rooms'],
+            ['name'=>'salles virtuelles', 'language_code'=>'fr', 'record_id'=>'vr_rooms'],
 
         ];
         DB::beginTransaction();
@@ -33,6 +39,14 @@ class VrCategoriesSeeder extends Seeder
                 $record = VrCategories::find($category['id']);
                 if (!$record) {
                     VrCategories::create($category);
+                }
+            }
+            foreach ($categoriesTranslations as $categoryTranslation) {
+                $record = VrCategoriesTranslations::where('record_id', $categoryTranslation['record_id'])
+                                                    ->where('language_code', $categoryTranslation['language_code'])
+                                                    ->first();
+                if (!$record) {
+                    VrCategoriesTranslations::create($categoryTranslation);
                 }
             }
         } catch (Exception $e) {
