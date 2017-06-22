@@ -61,8 +61,9 @@ class VrPagesController extends Controller
     public function store()
     {
         $data = request()->all();
-        dd($data);
+        //dd($data);
         $resources = request()->file('file');
+      //  dd($resources);
 
         $uploadController = new VrResourcesController();
 
@@ -102,6 +103,7 @@ class VrPagesController extends Controller
     {
 
         $record = VrPages::find($id)->toArray();
+
         $record['slug'] = $record['translations']['slug'];
         $record['title'] = $record['translations']['title'];
         $record['language_code'] = $record['translations']['language_code'];
@@ -114,7 +116,7 @@ class VrPagesController extends Controller
         $config = $this->getFormData();
         $config['record'] = $record;
         $config['titleForm'] = $id;
-        $config['route'] = route('app.pages.create');
+        $config['route'] = route('app.pages.edit', $id);
         $config['back'] = 'app.pages.index';
       // dd($config);
         return view('admin.form', $config);
@@ -131,7 +133,7 @@ class VrPagesController extends Controller
     {
         $data = request()->all();
         $record = VrPages::find($id);
-        dd($record);
+      // dd($record);
         $record->update($data);
         $data['record_id'] = $id;
         VrPagesTranslations::updateOrCreate([
