@@ -31,7 +31,7 @@ class VrMenu extends CoreModel
     }
     public function subMenu()
     {
-        return $this->hasMany(VrMenu::class , 'vr_parent_id','id')->with('subMenu');
+        return $this->hasMany(VrMenu::class , 'vr_parent_id','id')->with('subMenu')->orderByDesc('sequence');
     }
 
 

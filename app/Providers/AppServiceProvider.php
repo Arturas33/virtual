@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
         if(request()->segment(1) !== 'admin')
         {
             View::share('menu', getFrontEndMenu());
+            View::share('lang_menu', getActiveLanguages());
+            View::share('vr_room', getVrRoom());
         }
 
     }

@@ -2,6 +2,7 @@
 
 use App\Models\VrLanguageCodes;
 use App\Models\VrMenu;
+use App\Models\VrPages;
 
 function getActiveLanguages()
 {
@@ -26,8 +27,18 @@ function getActiveLanguages()
 
 function getFrontEndMenu()
 {
-    $config = VrMenu::where('vr_parent_id', null)->with('subMenu')->get()->toArray();
+    $config = VrMenu::where('vr_parent_id', null)->with('subMenu')->orderByDesc('sequence')->get()->toArray();
 
   //  dd($config);
-    return [$config];
+
+    return $config;
+}
+
+function getVrRoom()
+{
+    $config = VrPages::where('category_id', 'vr_rooms')->get()->toArray();
+
+  //  dd($config);
+
+    return $config ;
 }
