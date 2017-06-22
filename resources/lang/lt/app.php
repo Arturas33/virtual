@@ -38,5 +38,7 @@ return [
     'phone' => 'Telefonas',
     'role_id' => 'Roles',
     'cover_id'=> 'Paveiksliukas',
+    'room' => 'Virtualus kambariai',
+
 
 ];
