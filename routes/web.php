@@ -18,6 +18,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', ['as' => 'app.frontEnd.index', 'uses' => 'FrontEndController@index']);
+
+
+
+
+    Route::get('/{language}/pages/{slug}', ['as' => 'app.pages.show', 'uses' => 'FrontEndController@show']);
+
+
+
+
 //Auth::routes();
 //
 //
