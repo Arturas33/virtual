@@ -26,7 +26,8 @@ function getActiveLanguages()
 
 function getFrontEndMenu()
 {
-    $config = VrMenu::where('vr_parent_id')->get()->toArray();
-    dd($config);
+    $config = VrMenu::where('vr_parent_id', null)->with('subMenu')->get()->toArray();
+
+  //  dd($config);
     return [$config];
 }

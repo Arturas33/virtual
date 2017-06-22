@@ -98,7 +98,7 @@
                     <td></td>
                 @endif
                 <div class="form-group">
-                    {!! Form::file('file', null) !!}
+                    {!! Form::file('file') !!}
                 </div>
 
             @endif
