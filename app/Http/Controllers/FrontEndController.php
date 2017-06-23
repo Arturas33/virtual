@@ -51,9 +51,11 @@ class FrontEndController extends Controller {
 	 */
 	public function show($lang, $slug)
 	{
-        $data['page'] = VrPagesTranslations::where('slug', $slug)
+        $data = VrPagesTranslations::where('slug', $slug)
                                              ->where('language_code', $lang)
                                             ->with(['page'])->first()->toArray();
+
+        //dd($data);
        // dd($data);
        // $data['list'] = VrPages::get()->toArray();
 	    return view('pageShow',  $data);
