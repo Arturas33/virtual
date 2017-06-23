@@ -22,7 +22,6 @@ Route::get('/', ['as' => 'app.frontEnd.index', 'uses' => 'FrontEndController@ind
 
 
 
-    Route::get('/{language}/pages/{slug}', ['as' => 'app.pages.show', 'uses' => 'FrontEndController@show']);
 
 
 
@@ -123,6 +122,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']
         });
     });
 });
+Route::get('/{language}/pages/{slug}', ['as' => 'app.pages.show', 'uses' => 'FrontEndController@show']);
+
+
+
 
 //Route::group(['prefix' => '{lang}', 'middleware' => ['language']], function (){
 //
