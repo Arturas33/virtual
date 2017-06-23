@@ -40,5 +40,12 @@ return [
     'cover_id'=> 'Paveiksliukas',
     'room' => 'Virtualus kambariai',
 
+    'user_id' => 'Vartotojas',
+    'status' => 'Busena',
+    'pending' => 'Nepatvirtintas',
+    'canceled' => 'Atšauktas',
+    'aproved' => 'Patvirtintas',
+    'adminOrder' => ''
+
 
 ];
