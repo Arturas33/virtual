@@ -36,9 +36,9 @@
             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                aria-expanded="false">{{trans('app.room')}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-                @foreach($vr_room as $value)
+                @foreach($vr_room as $key => $value)
                     <li>
-                        <a href=" {{app()->getLocale(). '/pages/' .($value['translations']['slug'])}}">{{$value['translations']['title']}}</a>
+                        <a href=" /{{app()->getLocale(). '/pages/' . ($value['translations']['slug'])}}">{{($value['translations']['title'])}}</a>
                     </li>
                 @endforeach
             </ul>

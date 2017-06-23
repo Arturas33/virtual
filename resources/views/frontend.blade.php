@@ -5,13 +5,15 @@
     <title>Menu</title>
     @include('style')
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
+    <title>@yield('title')</title>
 
 </head>
 <body>
 
-
 @include('menu')
 
+
+@yield('content')
 
 
 </body>
