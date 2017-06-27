@@ -125,8 +125,25 @@
             }
         )
 
+        var $time = $('#time') ;
+        var $virtual_room = $('#virtual_room');
 
+        if ($('#time').length > 0 && $('#virtual_room').length > 0) {
+            $time.bind('change', function () {
+                console.log('TIME')
+            } );
+            $virtual_room.bind('change', function () {
+                console.log('VR room')
+            });
+
+
+
+        }
+
+
+        console.log('all good')
         // console.log($('#language_code'));
+
 
     </script>
 @endsection
