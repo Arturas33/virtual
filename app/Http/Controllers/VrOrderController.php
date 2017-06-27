@@ -75,6 +75,20 @@ class VrOrderController extends Controller
 
     }
 
+
+    public function reserv ()
+    {
+        $data = request()->all();
+        //dd($data);
+       //dd(VrReservations::get()->toArray());
+        $timeStart = Carbon::parse($data['time'])->startOfDay();
+        $timeEnd = Carbon::parse($data['time'])->endOfDay();
+
+
+        return VrReservations::where('time', '>', $timeStart)
+            ->where('time', '<', $timeEnd)->pluck('time');
+    }
+
     /**
      * Display the specified resource.
      * GET /vrorder/{id}
