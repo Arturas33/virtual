@@ -129,15 +129,18 @@
         var $virtual_room = $('#virtual_room');
 
         if ($('#time').length > 0 && $('#virtual_room').length > 0) {
-            $time.bind('change', function () {
-                console.log('TIME')
-            } );
-            $virtual_room.bind('change', function () {
-                console.log('VR room')
-            });
+
+            $time.bind('change', getAvailableHour);
+
+            $virtual_room.bind('change', getAvailableHour);
 
 
 
+        }
+
+        function getAvailableHour() {
+            console.log($('#virtual_room').val());
+            console.log($('#time').val());
         }
 
 
