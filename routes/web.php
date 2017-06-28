@@ -123,7 +123,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin-permissions']
         });
     });
 });
-Route::get('/{language}/pages/{slug}', ['as' => 'app.pages.show', 'uses' => 'FrontEndController@show']);
+Route::get('/{language}/pages/{slug}', ['as' => 'fe.pages.show', 'uses' => 'FrontEndController@show']);
 
 
 

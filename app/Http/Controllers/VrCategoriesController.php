@@ -2,9 +2,10 @@
 
 use App\Models\VrCategories;
 use App\Models\VrCategoriesTranslations;
+
 use Illuminate\Routing\Controller;
-use Ramsey\Uuid\Uuid;
-use App\Models\VrLanguageCodes;
+
+
 
 class VrCategoriesController extends Controller
 {
@@ -40,12 +41,12 @@ class VrCategoriesController extends Controller
     {
 
         $config = $this->getFormData();
-        $config['tableName'] =  trans('app.adminCategories');
+        $config['tableName'] = trans('app.adminCategories');
         $config['route'] = route('app.categories.create');
 
 
-       // dd($config);
-        return view('admin.form', $config );
+        // dd($config);
+        return view('admin.list', $config);
     }
 
     /**
@@ -58,10 +59,10 @@ class VrCategoriesController extends Controller
     {
         $data = request()->all();
         $record = VrCategories::create();
-        $data['record_id']= $record -> id;
+        $data['record_id'] = $record->id;
         VrCategoriesTranslations::create($data);
 
-        return redirect(route('app.categories.edit',$record->id));
+        return redirect(route('app.categories.edit', $record->id));
     }
 
     /**
@@ -91,8 +92,10 @@ class VrCategoriesController extends Controller
         $record['language_code'] = $record ['translations']['language_code'];
         $config = $this->getFormData();
         $config['record'] = $record;
-        $config['tableName'] = $id ;
-        $config['route'] = route('app.categories.create', $id);
+        $config['tableName'] = $id;
+
+        $config['route'] = route('app.categories.edit', $id);
+        $config['back'] = 'app.categories.index.';
 
         return view('admin.form', $config);
     }
@@ -106,7 +109,16 @@ class VrCategoriesController extends Controller
      */
     public function update($id)
     {
-        //
+        $data = request()->all();
+        $record = VrCategories::find($id);
+        $record->update($data);
+        $data['record_id'] = $id;
+        VrCategoriesTranslations::updateOrCreate([
+            'record_id' => $id,
+            'language_code' => $data['language_code']
+        ],$data);
+
+        return redirect(route('app.categories.index', $record->id));
     }
 
     /**
@@ -122,19 +134,19 @@ class VrCategoriesController extends Controller
         VrCategoriesTranslations::destroy(VrCategoriesTranslations::where('record_id', $id)->pluck('id')->toArray());
 
         VrCategories::destroy($id);
-        return['success'=> true, 'id'=>$id];
+        return ['success' => true, 'id' => $id];
     }
 
     private function getFormData()
     {
 
-        $config['fields'][]=[
-            'type'=>'drop_down',
-            'key'=>'language_code',
-            'options'=>getActiveLanguages()
+        $config['fields'][] = [
+            'type' => 'drop_down',
+            'key' => 'language_code',
+            'options' => getActiveLanguages()
         ];
-        $config['fields'][]=[
-            'type'=>'single_line',
+        $config['fields'][] = [
+            'type' => 'single_line',
             'key' => 'name',
         ];
 

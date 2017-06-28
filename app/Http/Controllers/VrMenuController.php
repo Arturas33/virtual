@@ -125,9 +125,19 @@ class VrMenuController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-//
+        $data = request()->all();
+        $record = VrMenu::find($id);
+        $record->update($data);
+        VrMenuTranslations::updateOrCreate([
+            'record_id' => $id,
+            'language_code' => $data['language_code']
+        ],$data);
+
+        return redirect(route('app.menu.index', $record->id));
+
+
     }
 
     /**

@@ -135,12 +135,9 @@
             $time.bind('change', getAvailableHour);
 
             $virtual_room.bind('change', getAvailableHour);
-            var list = prepareForCheckBox('2017-06-27');
-            console.log(list);
 
             function prepareForCheckBox(day) {
-                // reserved days from server
-                var reserved = [day + ' 17:00:00', day + ' 17:10:00'];
+
 
                 // new date
                 var date = new Date(day + ' 00:00:00');
@@ -201,6 +198,11 @@
 
         }
 
+        function generateCheckBoxes(list) {
+
+            return prepareForCheckBox (reserved , day);
+        }
+
         function getAvailableHour() {
             $.ajax({
                 url: '{{route('app.orders.reserv')}}',
@@ -214,7 +216,7 @@
 
                 success: function (response) {
 
-                    console.log(response)
+                    console.log(generateCheckBoxe($time.val(), response))
                 },
                 error: function () {
                     alert('ERROR')

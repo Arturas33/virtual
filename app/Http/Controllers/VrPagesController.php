@@ -141,7 +141,7 @@ class VrPagesController extends Controller
             'language_code' => $data['language_code']
         ],$data);
 
-        return redirect(route('app.pages.edit', $record->id));
+        return redirect(route('app.pages.index', $record->id));
     }
 
     /**
