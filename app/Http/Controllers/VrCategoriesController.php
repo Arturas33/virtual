@@ -42,11 +42,12 @@ class VrCategoriesController extends Controller
 
         $config = $this->getFormData();
         $config['tableName'] = trans('app.adminCategories');
+        $config['title'] = trans('app.adminCategories');
         $config['route'] = route('app.categories.create');
 
 
         // dd($config);
-        return view('admin.list', $config);
+        return view('admin.form', $config);
     }
 
     /**
